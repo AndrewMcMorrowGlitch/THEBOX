@@ -132,9 +132,9 @@ class ParticleSystem {
 function initSmoothScroll() {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
+                e.preventDefault();
                 const offsetTop = target.offsetTop - 80;
                 window.scrollTo({
                     top: offsetTop,
@@ -174,6 +174,10 @@ function initMobileMenu() {
     const menuBtn = document.getElementById('mobile-menu-btn');
     const mobileMenu = document.getElementById('mobile-menu');
 
+    if (!menuBtn || !mobileMenu) {
+        return;
+    }
+
     menuBtn.addEventListener('click', () => {
         mobileMenu.classList.toggle('active');
         menuBtn.classList.toggle('active');
@@ -199,7 +203,7 @@ function initScrollAnimations() {
 
     // Observe elements
     const animatedElements = document.querySelectorAll(
-        '.about-card, .step-content, .vision-card, .diff-column, .collab-feature, .contact-method'
+        '.about-card, .step-content, .vision-card, .diff-column, .collab-feature, .contact-method, .pathway-card, .info-card, .quote-block, .cta-content, .key-point, .visual-panel'
     );
 
     animatedElements.forEach((el, index) => {
@@ -246,6 +250,10 @@ function initParallax() {
 // ===== FORM HANDLING =====
 function initFormHandling() {
     const form = document.getElementById('apply-form');
+
+    if (!form) {
+        return;
+    }
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
