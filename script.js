@@ -203,14 +203,39 @@ function initScrollAnimations() {
 
     // Observe elements
     const animatedElements = document.querySelectorAll(
-        '.about-card, .step-content, .vision-card, .diff-column, .collab-feature, .contact-method, .pathway-card, .info-card, .quote-block, .cta-content, .key-point, .visual-panel'
+        '.about-card, .step-content, .vision-card, .diff-column, .collab-feature, .contact-method, .pathway-card, .info-card, .quote-block, .cta-content, .key-point, .visual-panel, .team-card'
     );
 
     animatedElements.forEach((el, index) => {
+        const delay = (index % 6) * 0.05;
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
-        el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+        el.style.transition = `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`;
         observer.observe(el);
+    });
+}
+
+function initCardGrids() {
+    const infoGrids = document.querySelectorAll('.info-grid');
+    infoGrids.forEach(grid => {
+        const cards = grid.querySelectorAll('.info-card');
+        if (cards.length % 3 !== 0) {
+            grid.classList.add('grid-2');
+        }
+        if (cards.length % 2 === 1) {
+            grid.classList.add('odd');
+        }
+    });
+
+    const teamGrids = document.querySelectorAll('.team-grid');
+    teamGrids.forEach(grid => {
+        const cards = grid.querySelectorAll('.team-card');
+        if (cards.length % 3 !== 0) {
+            grid.classList.add('grid-2');
+        }
+        if (cards.length % 2 === 1) {
+            grid.classList.add('odd');
+        }
     });
 }
 
@@ -485,6 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initNavbarScroll();
     initMobileMenu();
     initScrollAnimations();
+    initCardGrids();
     initParallax();
     initFormHandling();
     initTypingEffect();
